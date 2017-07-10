@@ -11,6 +11,13 @@
 # It seems there was a bug in writing the correct term_ids, 
 # namely the last term_id wasn't copied over to the role span
 # This is fixed in this version
+from __future__ import (absolute_import, division,
+                        print_function, unicode_literals)
+from builtins import (
+         bytes, dict, int, list, object, range, str,
+         ascii, chr, hex, input, next, oct, open,
+         pow, round, super,
+         filter, map, zip)
 
 from KafNafParserPy import *
 import sys 
@@ -18,6 +25,9 @@ import datetime
 import time
 import pprint
 import re
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 # Make sure you get the order of the input files right 
 nafinput = sys.argv[1]

@@ -1,0 +1,12 @@
+#!/bin/bash
+# Expects that command "timbl" works
+thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $thisdir
+tempdir=`mktemp -d -t SRLTMP.XXXXXX`
+inputfile=$tempdir/inputfile
+featurevector=$tempdir/csvfile
+timbloutputfile=$tempdir/timblpredictions
+cat | tee  $inputfile | python nafAlpinoToSRLFeatures.py > $featurevector
+timbl -mO:I1,2,3,4 -i 25Feb2015_e-mags_mags_press_newspapers.wgt -t $featurevector -o $timbloutputfile >/dev/null 2>/dev/null
+python timblToAlpinoNAF.py $inputfile $timbloutputfile
+rm -rf $tempdir
