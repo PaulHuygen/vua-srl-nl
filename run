@@ -1,6 +1,18 @@
 #!/bin/bash
+modname=vua-srl-nl
+#
+# Find the path to this module
+#
+if
+  [ -z ${MODROOT+x} ]
+then
+  # Find out path ourselves
+  thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+else
+  thisdir=$MODROOT/$modname
+fi
+thisscript=${thisdir}/run
 # Expects that command "timbl" works
-thisdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $thisdir
 tempdir=`mktemp -d -t SRLTMP.XXXXXX`
 inputfile=$tempdir/inputfile
